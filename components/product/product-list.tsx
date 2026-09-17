@@ -1,7 +1,4 @@
-import { Hero } from "@/components/hero";
-import { BrandList } from "@/components/brand-list";
-import { Categories } from "@/components/categories";
-import { ProductSlider } from "@/components/product/product-slider";
+import { ProductCard } from "@/components/product/product-card";
 
 const newestProductsList = [
   {
@@ -96,42 +93,26 @@ const newestProductsList = [
   },
 ];
 
-const brands = [
-  { id: "1", name: "Syngenta", slug: "syngenta" },
-  { id: "2", name: "LG Seeds", slug: "lg-seeds" },
-  { id: "3", name: "Pioneer", slug: "pioneer" },
-  { id: "4", name: "Corteva", slug: "corteva" },
-  { id: "5", name: "DEFENDA", slug: "defenda" },
-  { id: "6", name: "LEGEND", slug: "legend" },
-  { id: "7", name: "SESVanderHave", slug: "ses-vanderhave" },
-  { id: "8", name: "UNIVERSEED", slug: "universeed" },
-];
-
-export default function Home() {
+export const ProductList = () => {
   return (
-    <div className="w-full max-w-360 mx-auto space-y-10">
-      <Hero />
-      <BrandList
-        brands={brands}
-        title="Продукція представлена від провідних виробників"
-      />
-      {newestProductsList && (
-        <ProductSlider
-          title="Хiти продажу"
-          description="Якісне насіння від провідних світових виробників"
-          link="/"
-          data={newestProductsList}
-        />
-      )}
-      {newestProductsList && (
-        <ProductSlider
-          title="Нові надходження"
-          description="Якісне насіння від провідних світових виробників"
-          link="/"
-          data={newestProductsList}
-        />
-      )}
-      <Categories />
-    </div>
+    <section className="space-y-10">
+      <h2 className="text-4xl font-bold">Example of product list</h2>
+      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        {newestProductsList.map(
+          ({ id, name, slug, imgSrc, value, price, category }) => (
+            <li key={id}>
+              <ProductCard
+                name={name}
+                slug={slug}
+                imgSrc={imgSrc}
+                value={value}
+                price={price}
+                category={category}
+              />
+            </li>
+          ),
+        )}
+      </ul>
+    </section>
   );
-}
+};
